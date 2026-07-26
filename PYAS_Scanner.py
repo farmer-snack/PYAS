@@ -295,6 +295,7 @@ class ScannerMixin:
                             self.ui_queue.put(js_cmd)
 
                         self.write_log("SCAN", "Virus Detected", source=norm_path, file_hash=self.calc_file_hash(norm_path))
+                        # qianxing
 
                     self.cloud_check(norm_path)
                 except Exception as e:
@@ -374,7 +375,7 @@ class ScannerMixin:
                         try:
                             address = 0
                             mbi = MEMORY_BASIC_INFORMATION()
-                            while address < max_address and not self._is_scan_cancel_requested() and self.kernel32.VirtualQueryEx(h_process, ctypes.c_void_p(address), ctypes.byref(mbi), ctypes.sizeof(mbi)):
+                            while address < max_address and not self._is_scan_cancel_requested() and self.kernel32.VirtualQueryEx(h_process, ctypes.c_void_p(address), ctypes.byref(mbi), ctypes.si[...]
                                 if mbi.State == 0x1000 and mbi.Type == 0x1000000:
                                     if self.psapi.GetMappedFileNameW(h_process, ctypes.c_void_p(address), buf, 1024):
                                         raw_path = buf.value
